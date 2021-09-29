@@ -1,0 +1,19 @@
+{
+	"entryFile": "src/index.ts",
+	"noImplicitAdditionalProperties": "throw-on-extras",
+	"spec": {
+		"tags": [
+			{
+				"name": "Admin",
+				"description": "Here all the operations of the users are given",
+				"externalDocs": {
+					"description": "Find more about user",
+					"url": "http://swagger.io"
+				}
+			}
+		],
+		"outputDirectory": "public",
+		"specVersion": 3,
+		"description": "this is the description of the file"
+	}
+}

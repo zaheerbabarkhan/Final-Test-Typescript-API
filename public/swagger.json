@@ -1,0 +1,37 @@
+{
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "Final-Task",
+		"version": "1.0.0",
+		"description": "this is the description of the file",
+		"license": {
+			"name": "ISC"
+		},
+		"contact": {}
+	},
+	"openapi": "3.0.0",
+	"paths": {},
+	"servers": [
+		{
+			"url": "/"
+		}
+	],
+	"tags": [
+		{
+			"name": "Admin",
+			"description": "Here all the operations of the users are given",
+			"externalDocs": {
+				"description": "Find more about user",
+				"url": "http://swagger.io"
+			}
+		}
+	]
+}
