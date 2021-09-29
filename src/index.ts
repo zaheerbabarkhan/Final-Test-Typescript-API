@@ -1,7 +1,6 @@
 import express, { Request, Response, NextFunction, Application } from 'express';
 import morgan from 'morgan';
 import swaggerUi from 'swagger-ui-express';
-import bodyParser from 'body-parser';
 import cors from 'cors';
 import { MainRoutes } from './routes';
 import { DBMongo } from './config/mongodb.conn';
@@ -20,7 +19,7 @@ import {
 let server: Server | null = null;
 const PORT = process.env.PORT || 4000;
 
-function initApplication(): express.Application {
+function initApplication(): Application {
 	new DBMongo().connect(MongoCluster, MongoDbName, Mongo_User_Name, Mongo_Pass);
 	const app = express();
 	app.use(express.static('public'));
@@ -28,9 +27,6 @@ function initApplication(): express.Application {
 	app.use(morgan('tiny'));
 	const swaggerOptions = {
 		swaggerOptions: {
-			customCss: '.swagger-ui .topbar { display: none }',
-			customSiteTitle: 'New Title',
-			customfavIcon: '/assets/favicon.icon',
 			url: '/swagger.json',
 		},
 	};
