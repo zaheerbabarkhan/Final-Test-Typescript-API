@@ -1,3 +1,8 @@
 # Final-Test-Typescript-API
 
-commands
+# commands
+npm install
+
+npm run build
+
+npm start
