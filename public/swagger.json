@@ -293,6 +293,53 @@
 				],
 				"type": "object",
 				"additionalProperties": false
+			},
+			"IGroupConversationResponse": {
+				"properties": {
+					"_id": {
+						"type": "string"
+					},
+					"Name": {
+						"type": "string"
+					},
+					"Members": {
+						"items": {
+							"$ref": "#/components/schemas/IGroupMembers"
+						},
+						"type": "array"
+					},
+					"Conversation": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"_id",
+					"Name",
+					"Members",
+					"Conversation"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IConversationSendMessageRequest": {
+				"properties": {
+					"UserId": {
+						"type": "string"
+					},
+					"GroupId": {
+						"type": "string"
+					},
+					"Message": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"UserId",
+					"GroupId",
+					"Message"
+				],
+				"type": "object",
+				"additionalProperties": false
 			}
 		},
 		"securitySchemes": {
@@ -598,6 +645,7 @@
 						}
 					}
 				},
+				"description": "Delete Existing User",
 				"tags": [
 					"User"
 				],
@@ -613,6 +661,40 @@
 						"application/json": {
 							"schema": {
 								"$ref": "#/components/schemas/IUserDeleteRequest"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/user/sendMessage": {
+			"post": {
+				"operationId": "SendMessage",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IGroupConversationResponse"
+								}
+							}
+						}
+					}
+				},
+				"description": "Sending Message to a group",
+				"tags": [
+					"Conversation",
+					"User"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IConversationSendMessageRequest"
 							}
 						}
 					}

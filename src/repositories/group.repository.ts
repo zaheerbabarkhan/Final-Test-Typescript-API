@@ -1,7 +1,9 @@
+import { GroupController } from '../controllers/group.controller';
 import { GroupModel } from '../models/group.model';
 import {
 	IGroupAddMemberRequest,
 	IGroupSaveRequest,
+	IUpdateConversation,
 } from '../types/requests/group.request';
 
 export class GroupRepository {
@@ -9,7 +11,9 @@ export class GroupRepository {
 		return new GroupModel(Group).save();
 	}
 	getGroup(_id: string) {
-		return GroupModel.findById(_id).populate('Conversation', 'Members');
+		return GroupModel.findById(_id)
+			.populate('Members')
+			.populate('Conversation');
 	}
 	updateGroup(Group: IGroupAddMemberRequest) {
 		return GroupModel.findByIdAndUpdate(
@@ -25,5 +29,16 @@ export class GroupRepository {
 	}
 	deleteGroup(_id: string) {
 		return GroupModel.findByIdAndDelete(_id);
+	}
+
+	updateGroupConversation(group: IUpdateConversation) {
+		return GroupModel.findByIdAndUpdate(
+			group.GroupId,
+			{ Conversation: group.ConversationId },
+			{
+				new: true,
+				upsert: true,
+			}
+		).populate('Conversation');
 	}
 }

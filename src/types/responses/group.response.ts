@@ -9,3 +9,9 @@ export interface IGroupAddMemberResponse {
 	Members: IGroupMembers[];
 }
 export interface IGroupGetResponse {}
+export interface IGroupConversationResponse {
+	_id: string;
+	Name: string;
+	Members: IGroupMembers[];
+	Conversation: string;
+}

@@ -15,3 +15,9 @@ export interface IGroupDeleteRequest {
 export interface IGroupGetRequest {
 	_id: string;
 }
+
+
+export interface IUpdateConversation {
+	GroupId: string;
+	ConversationId: string;
+}

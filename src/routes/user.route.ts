@@ -41,6 +41,17 @@ export class UserRouter {
 				next(error);
 			}
 		});
+		this.router.post('/sendMessage', async (req, res, next) => {
+			const message = req.body;
+			const conversation = await new UserController().sendMessage(message);
+			if (conversation) {
+				res.status(200).send(conversation);
+			} else {
+				res.status(400).send({
+					status: 'Failed',
+				});
+			}
+		});
 	}
 }
 
