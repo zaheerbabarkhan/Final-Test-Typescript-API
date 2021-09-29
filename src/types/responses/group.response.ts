@@ -8,3 +8,4 @@ export interface IGroupSaveResponse {
 export interface IGroupAddMemberResponse {
 	Members: IGroupMembers[];
 }
+export interface IGroupGetResponse {}

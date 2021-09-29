@@ -1,5 +1,6 @@
 import express from 'express';
 import { AdminAPI } from './admin.route';
+import { GroupAPI } from './group.route';
 import { UserAPI } from './user.route';
 
 export class MainRouter {
@@ -11,6 +12,7 @@ export class MainRouter {
 	routes() {
 		this.router.use('/admin', AdminAPI);
 		this.router.use('/user', UserAPI);
+		this.router.use('/group', GroupAPI);
 	}
 }
 

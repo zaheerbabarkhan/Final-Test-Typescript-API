@@ -78,6 +78,120 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"IGroupMembers": {
+				"properties": {
+					"_id": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"_id"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IGroupSaveResponse": {
+				"properties": {
+					"_id": {
+						"type": "string"
+					},
+					"Name": {
+						"type": "string"
+					},
+					"Members": {
+						"items": {
+							"$ref": "#/components/schemas/IGroupMembers"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"_id",
+					"Name",
+					"Members"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IGroupSaveRequest": {
+				"properties": {
+					"Name": {
+						"type": "string"
+					},
+					"Members": {
+						"items": {
+							"$ref": "#/components/schemas/IGroupMembers"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"Name",
+					"Members"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IGroupAddMemberResponse": {
+				"properties": {
+					"Members": {
+						"items": {
+							"$ref": "#/components/schemas/IGroupMembers"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"Members"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IGroupAddMemberRequest": {
+				"properties": {
+					"GroupId": {
+						"type": "string"
+					},
+					"UserId": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"GroupId",
+					"UserId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IGroupGetResponse": {
+				"properties": {},
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IGroupGetRequest": {
+				"properties": {
+					"_id": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"_id"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IGroupDeleteRequest": {
+				"properties": {
+					"_id": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"_id"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"IUserGroups": {
 				"properties": {
 					"_id": {
@@ -264,6 +378,137 @@
 						"application/json": {
 							"schema": {
 								"$ref": "#/components/schemas/IAdminLoginRequest"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/group/saveGroup": {
+			"post": {
+				"operationId": "SaveGroup",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IGroupSaveResponse"
+								}
+							}
+						}
+					}
+				},
+				"description": "Save New Group",
+				"tags": [
+					"Groups"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IGroupSaveRequest"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/group/addMemberToGroup": {
+			"put": {
+				"operationId": "AddMemberToGroup",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IGroupAddMemberResponse"
+								}
+							}
+						}
+					}
+				},
+				"description": "Add Member to Group",
+				"tags": [
+					"Groups"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IGroupAddMemberRequest"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/group/getGroup": {
+			"post": {
+				"operationId": "GetGroup",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IGroupGetResponse"
+								}
+							}
+						}
+					}
+				},
+				"description": "Get Details of  Group",
+				"tags": [
+					"Groups"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IGroupGetRequest"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/group/deleteGroup": {
+			"delete": {
+				"operationId": "DeleteGroup",
+				"responses": {
+					"200": {
+						"description": "Group Deleted",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IGroupGetResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Groups"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IGroupDeleteRequest"
 							}
 						}
 					}

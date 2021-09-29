@@ -9,7 +9,7 @@ export class GroupRepository {
 		return new GroupModel(Group).save();
 	}
 	getGroup(_id: string) {
-		return GroupModel.findById(_id);
+		return GroupModel.findById(_id).populate('Conversation', 'Members');
 	}
 	updateGroup(Group: IGroupAddMemberRequest) {
 		return GroupModel.findByIdAndUpdate(
