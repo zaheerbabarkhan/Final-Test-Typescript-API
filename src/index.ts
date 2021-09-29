@@ -2,7 +2,7 @@ import express, { Request, Response, NextFunction, Application } from 'express';
 import morgan from 'morgan';
 import swaggerUi from 'swagger-ui-express';
 import cors from 'cors';
-import { MainRoutes } from './routes';
+import { MainRoutes } from './routes/index.route';
 import { DBMongo } from './config/mongodb.conn';
 import { Server } from 'http';
 

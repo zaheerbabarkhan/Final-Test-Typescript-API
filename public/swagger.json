@@ -5,8 +5,189 @@
 		"parameters": {},
 		"requestBodies": {},
 		"responses": {},
-		"schemas": {},
-		"securitySchemes": {}
+		"schemas": {
+			"IAdminSaveResponse": {
+				"properties": {
+					"_id": {
+						"type": "string"
+					},
+					"Name": {
+						"type": "string"
+					},
+					"Email": {
+						"type": "string"
+					},
+					"Password": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"_id",
+					"Name",
+					"Email",
+					"Password"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IAdminSaveRequest": {
+				"properties": {
+					"Name": {
+						"type": "string"
+					},
+					"Email": {
+						"type": "string"
+					},
+					"Password": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"Name",
+					"Email",
+					"Password"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IadminLoginResponse": {
+				"properties": {
+					"token": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"token"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IAdminLoginRequest": {
+				"properties": {
+					"Email": {
+						"type": "string"
+					},
+					"Password": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"Email",
+					"Password"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IUserGroups": {
+				"properties": {
+					"_id": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"_id"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IUserSaveUpdateResponse": {
+				"properties": {
+					"_id": {
+						"type": "string"
+					},
+					"Name": {
+						"type": "string"
+					},
+					"Email": {
+						"type": "string"
+					},
+					"Password": {
+						"type": "string"
+					},
+					"Groups": {
+						"items": {
+							"$ref": "#/components/schemas/IUserGroups"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"_id",
+					"Name",
+					"Email",
+					"Password",
+					"Groups"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IUserSaveRequest": {
+				"properties": {
+					"Name": {
+						"type": "string"
+					},
+					"Email": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"Name",
+					"Email"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IUserUpdateRequest": {
+				"properties": {
+					"_id": {
+						"type": "string"
+					},
+					"Name": {
+						"type": "string"
+					},
+					"Email": {
+						"type": "string"
+					},
+					"Password": {
+						"type": "string"
+					},
+					"Groups": {
+						"items": {
+							"$ref": "#/components/schemas/IUserGroups"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"_id",
+					"Name",
+					"Email",
+					"Password",
+					"Groups"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IUserDeleteRequest": {
+				"properties": {
+					"_id": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"_id"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {
+			"api_key": {
+				"type": "apiKey",
+				"name": "token",
+				"in": "header"
+			}
+		}
 	},
 	"info": {
 		"title": "Final-Task",
@@ -18,7 +199,182 @@
 		"contact": {}
 	},
 	"openapi": "3.0.0",
-	"paths": {},
+	"paths": {
+		"/admin/saveAdmin": {
+			"post": {
+				"operationId": "SaveAdmin",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IAdminSaveResponse"
+								}
+							}
+						}
+					}
+				},
+				"description": "Create New Admin",
+				"tags": [
+					"Admin"
+				],
+				"security": [
+					{
+						"api_key": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IAdminSaveRequest"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/admin/loginAdmin": {
+			"post": {
+				"operationId": "AdminLogin",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IadminLoginResponse"
+								}
+							}
+						}
+					}
+				},
+				"description": "Admin Login",
+				"tags": [
+					"Admin Login"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IAdminLoginRequest"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/user/saveUser": {
+			"post": {
+				"operationId": "SaveUser",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IUserSaveUpdateResponse"
+								}
+							}
+						}
+					}
+				},
+				"description": "Regisater User",
+				"tags": [
+					"User"
+				],
+				"security": [
+					{
+						"api_key": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IUserSaveRequest"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/user/updateUser": {
+			"put": {
+				"operationId": "UpdateUser",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IUserSaveUpdateResponse"
+								}
+							}
+						}
+					}
+				},
+				"description": "Update Existing User",
+				"tags": [
+					"User"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IUserUpdateRequest"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/user/deleteUser": {
+			"delete": {
+				"operationId": "DeleteUser",
+				"responses": {
+					"200": {
+						"description": "User Deleted Successfully",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				},
+				"tags": [
+					"User"
+				],
+				"security": [
+					{
+						"api_key": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IUserDeleteRequest"
+							}
+						}
+					}
+				}
+			}
+		}
+	},
 	"servers": [
 		{
 			"url": "/"
@@ -27,10 +383,18 @@
 	"tags": [
 		{
 			"name": "Admin",
-			"description": "Here all the operations of the users are given",
+			"description": "Here all the CRUD operations of the Admin are given",
 			"externalDocs": {
-				"description": "Find more about user",
-				"url": "http://swagger.io"
+				"description": "Find more about Admin",
+				"url": "http://admin.io"
+			}
+		},
+		{
+			"name": "Admin Login",
+			"description": "This is Admin Login only",
+			"externalDocs": {
+				"description": "Find more about Admin",
+				"url": "http://admin.io"
 			}
 		}
 	]

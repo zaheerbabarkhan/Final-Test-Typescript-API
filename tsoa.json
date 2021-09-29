@@ -2,13 +2,28 @@
 	"entryFile": "src/index.ts",
 	"noImplicitAdditionalProperties": "throw-on-extras",
 	"spec": {
+		"securityDefinitions": {
+			"api_key": {
+				"type": "apiKey",
+				"name": "token",
+				"in": "header"
+			}
+		},
 		"tags": [
 			{
 				"name": "Admin",
-				"description": "Here all the operations of the users are given",
+				"description": "Here all the CRUD operations of the Admin are given",
 				"externalDocs": {
-					"description": "Find more about user",
-					"url": "http://swagger.io"
+					"description": "Find more about Admin",
+					"url": "http://admin.io"
+				}
+			},
+			{
+				"name": "Admin Login",
+				"description": "This is Admin Login only",
+				"externalDocs": {
+					"description": "Find more about Admin",
+					"url": "http://admin.io"
 				}
 			}
 		],

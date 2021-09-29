@@ -1,4 +1,6 @@
 import express from 'express';
+import { AdminAPI } from './admin.route';
+import { UserAPI } from './user.route';
 
 export class MainRouter {
 	router: express.Router;
@@ -7,14 +9,9 @@ export class MainRouter {
 		this.routes();
 	}
 	routes() {
-		this.router.get('/', (req, res, next) => {
-			res.send('<h1>Kia student hy aap</h1>');
-		});
+		this.router.use('/admin', AdminAPI);
+		this.router.use('/user', UserAPI);
 	}
 }
-
-
-
-
 
 export const MainRoutes = new MainRouter().router;
