@@ -1,5 +1,6 @@
 import express from 'express';
 import { AdminController } from '../controllers/admin.controller';
+import { authAdmin } from '../middleware/adminAuth.middleware';
 
 export class AdminRouter {
 	router: express.Router;
@@ -9,7 +10,7 @@ export class AdminRouter {
 	}
 	configRoutes() {
 		console.log('router ');
-		this.router.post('/saveAdmin', async (req, res, next) => {
+		this.router.post('/saveAdmin', authAdmin, async (req, res, next) => {
 			try {
 				const admin = req.body;
 				const newAdmin = await new AdminController().saveAdmin(admin);

@@ -8,6 +8,9 @@ export class AdminRepository {
 	getAdmin(Admin: IAdminLoginRequest) {
 		return AdminModel.find(Admin);
 	}
+	getAdminById(_id: string) {
+		return AdminModel.findById(_id);
+	}
 	saveAdmin(Admin: IAdminSaveRequest) {
 		return new AdminModel(Admin).save();
 	}

@@ -15,3 +15,9 @@ export interface IGroupConversationResponse {
 	Members: IGroupMembers[];
 	Conversation: string;
 }
+
+export interface IGroupSearchWordResponse {
+	User: string;
+	Message: string;
+	Time: Date;
+}

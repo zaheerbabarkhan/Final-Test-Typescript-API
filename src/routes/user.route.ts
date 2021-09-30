@@ -1,5 +1,6 @@
 import express from 'express';
 import { UserController } from '../controllers/user.controller';
+import { authAdmin } from '../middleware/adminAuth.middleware';
 
 export class UserRouter {
 	router: express.Router;
@@ -8,7 +9,7 @@ export class UserRouter {
 		this.configRoutes();
 	}
 	configRoutes() {
-		this.router.post('/saveUser', async (req, res, next) => {
+		this.router.post('/saveUser', authAdmin, async (req, res, next) => {
 			try {
 				const user = req.body;
 				const newUser = await new UserController().saveUser(user);
@@ -19,7 +20,7 @@ export class UserRouter {
 				next(error);
 			}
 		});
-		this.router.put('/updateUser', async (req, res, next) => {
+		this.router.put('/updateUser', authAdmin, async (req, res, next) => {
 			try {
 				const user = req.body;
 				const updatedUser = await new UserController().updateUser(user);
@@ -30,7 +31,7 @@ export class UserRouter {
 				next(error);
 			}
 		});
-		this.router.delete('/deleteUser', async (req, res, next) => {
+		this.router.delete('/deleteUser', authAdmin, async (req, res, next) => {
 			try {
 				const delUser = req.body;
 				const deletedUser = await new UserController().deleteUser(delUser);

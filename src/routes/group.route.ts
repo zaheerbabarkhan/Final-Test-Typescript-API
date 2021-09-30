@@ -1,5 +1,6 @@
 import express from 'express';
 import { GroupController } from '../controllers/group.controller';
+import { authAdmin } from '../middleware/adminAuth.middleware';
 export class GroupRouter {
 	router: express.Router;
 	constructor() {
@@ -7,7 +8,7 @@ export class GroupRouter {
 		this.configRoutes();
 	}
 	configRoutes() {
-		this.router.post('/saveGroup', async (req, res, next) => {
+		this.router.post('/saveGroup', authAdmin, async (req, res, next) => {
 			try {
 				const group = req.body;
 				const newGroup = await new GroupController().saveGroup(group);
@@ -18,7 +19,7 @@ export class GroupRouter {
 				next(error);
 			}
 		});
-		this.router.put('/addMemberToGroup', async (req, res, next) => {
+		this.router.put('/addMemberToGroup', authAdmin, async (req, res, next) => {
 			try {
 				const memeber = req.body;
 				const updatedGroup = await new GroupController().addMemberToGroup(
@@ -29,7 +30,7 @@ export class GroupRouter {
 				next(error);
 			}
 		});
-		this.router.post('/getGroup', async (req, res, next) => {
+		this.router.post('/getGroup', authAdmin, async (req, res, next) => {
 			try {
 				const getGroup = req.body;
 				const group = await new GroupController().getGroup(getGroup);
@@ -38,12 +39,21 @@ export class GroupRouter {
 				});
 			} catch (error) {}
 		});
-		this.router.delete('/deleteGroup', async (req, res, next) => {
+		this.router.delete('/deleteGroup', authAdmin, async (req, res, next) => {
 			const delreq = req.body;
 			await new GroupController().deleteGroup(delreq);
 			res.status(200).json({
 				message: 'Group Deleted',
 			});
+		});
+		this.router.post('/searchWord', authAdmin, async (req, res, next) => {
+			try {
+				const search = req.body;
+				const result = await new GroupController().searchWord(search);
+				res.send(result);
+			} catch (error) {
+				next(error);
+			}
 		});
 	}
 }

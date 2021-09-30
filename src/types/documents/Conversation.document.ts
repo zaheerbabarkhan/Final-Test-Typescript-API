@@ -7,4 +7,5 @@ export interface IConversation extends Document {
 export interface IGroupMessage {
 	User: string;
 	Message: string;
+	Date: Date;
 }

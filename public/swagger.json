@@ -192,6 +192,43 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"IGroupSearchWordResponse": {
+				"properties": {
+					"User": {
+						"type": "string"
+					},
+					"Message": {
+						"type": "string"
+					},
+					"Time": {
+						"type": "string",
+						"format": "date-time"
+					}
+				},
+				"required": [
+					"User",
+					"Message",
+					"Time"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IGroupSearchWordRequest": {
+				"properties": {
+					"Word": {
+						"type": "string"
+					},
+					"GroupId": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"Word",
+					"GroupId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"IUserGroups": {
 				"properties": {
 					"_id": {
@@ -450,7 +487,11 @@
 				"tags": [
 					"Groups"
 				],
-				"security": [],
+				"security": [
+					{
+						"api_key": []
+					}
+				],
 				"parameters": [],
 				"requestBody": {
 					"required": true,
@@ -483,7 +524,11 @@
 				"tags": [
 					"Groups"
 				],
-				"security": [],
+				"security": [
+					{
+						"api_key": []
+					}
+				],
 				"parameters": [],
 				"requestBody": {
 					"required": true,
@@ -516,7 +561,11 @@
 				"tags": [
 					"Groups"
 				],
-				"security": [],
+				"security": [
+					{
+						"api_key": []
+					}
+				],
 				"parameters": [],
 				"requestBody": {
 					"required": true,
@@ -545,10 +594,15 @@
 						}
 					}
 				},
+				"description": "Delete Group",
 				"tags": [
 					"Groups"
 				],
-				"security": [],
+				"security": [
+					{
+						"api_key": []
+					}
+				],
 				"parameters": [],
 				"requestBody": {
 					"required": true,
@@ -556,6 +610,46 @@
 						"application/json": {
 							"schema": {
 								"$ref": "#/components/schemas/IGroupDeleteRequest"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/group/searchWord": {
+			"post": {
+				"operationId": "SearchWord",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/IGroupSearchWordResponse"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"description": "Search Words in Group",
+				"tags": [
+					"Search Word"
+				],
+				"security": [
+					{
+						"api_key": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IGroupSearchWordRequest"
 							}
 						}
 					}
@@ -618,7 +712,11 @@
 				"tags": [
 					"User"
 				],
-				"security": [],
+				"security": [
+					{
+						"api_key": []
+					}
+				],
 				"parameters": [],
 				"requestBody": {
 					"required": true,
@@ -684,8 +782,7 @@
 				},
 				"description": "Sending Message to a group",
 				"tags": [
-					"Conversation",
-					"User"
+					"Conversation"
 				],
 				"security": [],
 				"parameters": [],
@@ -709,7 +806,7 @@
 	],
 	"tags": [
 		{
-			"name": "Admin",
+			"name": "Admin Operations",
 			"description": "Here all the CRUD operations of the Admin are given",
 			"externalDocs": {
 				"description": "Find more about Admin",
@@ -718,11 +815,27 @@
 		},
 		{
 			"name": "Admin Login",
-			"description": "This is Admin Login only",
-			"externalDocs": {
-				"description": "Find more about Admin",
-				"url": "http://admin.io"
-			}
+			"description": "This is Admin Login only"
+		},
+		{
+			"name": "Admin",
+			"description": "Here We can save new Admin"
+		},
+		{
+			"name": "User",
+			"description": "Here admin can do operations about users"
+		},
+		{
+			"name": "Search Word",
+			"description": "Here admin can search word in group messages"
+		},
+		{
+			"name": "Groups",
+			"description": "Here admin can do operations about groups"
+		},
+		{
+			"name": "Conversation",
+			"description": "Here suer can send messages to the user"
 		}
 	]
 }

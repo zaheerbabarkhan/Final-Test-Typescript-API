@@ -11,7 +11,7 @@
 		},
 		"tags": [
 			{
-				"name": "Admin",
+				"name": "Admin Operations",
 				"description": "Here all the CRUD operations of the Admin are given",
 				"externalDocs": {
 					"description": "Find more about Admin",
@@ -20,11 +20,27 @@
 			},
 			{
 				"name": "Admin Login",
-				"description": "This is Admin Login only",
-				"externalDocs": {
-					"description": "Find more about Admin",
-					"url": "http://admin.io"
-				}
+				"description": "This is Admin Login only"
+			},
+			{
+				"name": "Admin",
+				"description": "Here We can save new Admin"
+			},
+			{
+				"name": "User",
+				"description": "Here admin can do operations about users"
+			},
+			{
+				"name": "Search Word",
+				"description": "Here admin can search word in group messages"
+			},
+			{
+				"name": "Groups",
+				"description": "Here admin can do operations about groups"
+			},
+			{
+				"name": "Conversation",
+				"description": "Here suer can send messages to the user"
 			}
 		],
 		"outputDirectory": "public",

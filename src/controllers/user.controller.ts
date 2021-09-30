@@ -25,7 +25,6 @@ import ErrorHandler from '../utils/error';
 import { GroupController } from './group.controller';
 
 @Route('user')
-@Tags('User')
 export class UserController {
 	/**
 	 * Regisater User
@@ -33,6 +32,7 @@ export class UserController {
 	 */
 	@Security('api_key')
 	@Post('saveUser')
+	@Tags('User')
 	async saveUser(
 		@Body() User: IUserSaveRequest
 	): Promise<IUserSaveUpdateResponse> {
@@ -47,7 +47,9 @@ export class UserController {
 	 * Update Existing User
 	 * @description Update Existing User
 	 */
+	@Security('api_key')
 	@Put('updateUser')
+	@Tags('User')
 	async updateUser(
 		@Body() User: IUserUpdateRequest
 	): Promise<IUserSaveUpdateResponse> {
@@ -63,6 +65,7 @@ export class UserController {
 	 */
 	@Security('api_key')
 	@Delete('deleteUser')
+	@Tags('User')
 	@SuccessResponse(200, 'User Deleted Successfully')
 	async deleteUser(@Body() delRequest: IUserDeleteRequest): Promise<any> {
 		return await new UserRepository().deleteUser(delRequest._id);

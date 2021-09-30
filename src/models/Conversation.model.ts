@@ -12,6 +12,10 @@ const ConversationSchema = new Schema({
 				ref: 'User',
 			},
 			Message: String,
+			Date: {
+				type: Date,
+				default: new Date(),
+			},
 		},
 	],
 });
