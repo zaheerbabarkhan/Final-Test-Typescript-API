@@ -16,7 +16,7 @@ export class ConversationRepository {
 			}
 		);
 	}
-	getConversation(_id: string) {
-		return ConversationModel.findOne({ Group: _id }).select('Messages');
+	getConversation() {
+		return ConversationModel.find();
 	}
 }

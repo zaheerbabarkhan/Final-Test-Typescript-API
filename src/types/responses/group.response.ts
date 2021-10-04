@@ -17,6 +17,10 @@ export interface IGroupConversationResponse {
 }
 
 export interface IGroupSearchWordResponse {
+	GroupId: string;
+	Occurence: Occurence[];
+}
+export interface Occurence {
 	User: string;
 	Message: string;
 	Time: Date;

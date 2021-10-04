@@ -192,7 +192,7 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"IGroupSearchWordResponse": {
+			"Occurence": {
 				"properties": {
 					"User": {
 						"type": "string"
@@ -213,18 +213,49 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"IGroupSearchWordResponse": {
+				"properties": {
+					"GroupId": {
+						"type": "string"
+					},
+					"Occurence": {
+						"items": {
+							"$ref": "#/components/schemas/Occurence"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"GroupId",
+					"Occurence"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"IGroupSearchWordRequest": {
 				"properties": {
 					"Word": {
 						"type": "string"
+					}
+				},
+				"required": [
+					"Word"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IGroupSearchWordByUserRequest": {
+				"properties": {
+					"User": {
+						"type": "string"
 					},
-					"GroupId": {
+					"Word": {
 						"type": "string"
 					}
 				},
 				"required": [
-					"Word",
-					"GroupId"
+					"User",
+					"Word"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -650,6 +681,42 @@
 						"application/json": {
 							"schema": {
 								"$ref": "#/components/schemas/IGroupSearchWordRequest"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/group/searchWordByUser": {
+			"post": {
+				"operationId": "SearchWordByUser",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IGroupSearchWordResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Search Word"
+				],
+				"security": [
+					{
+						"api_key": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IGroupSearchWordByUserRequest"
 							}
 						}
 					}

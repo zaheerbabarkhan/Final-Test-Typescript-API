@@ -55,6 +55,15 @@ export class GroupRouter {
 				next(error);
 			}
 		});
+		this.router.post('/searchWordByUser', authAdmin, async (req, res, next) => {
+			try {
+				const search = req.body;
+				const result = await new GroupController().searchWordByUser(search);
+				res.send(result);
+			} catch (error) {
+				next(error);
+			}
+		});
 	}
 }
 

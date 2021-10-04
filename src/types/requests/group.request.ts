@@ -23,5 +23,9 @@ export interface IUpdateConversation {
 }
 export interface IGroupSearchWordRequest {
 	Word: string;
-	GroupId: string;
+}
+
+export interface IGroupSearchWordByUserRequest {
+	User: string;
+	Word: string;
 }

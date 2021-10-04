@@ -17,6 +17,7 @@ import {
 	IGroupGetRequest,
 	IGroupSaveRequest,
 	IGroupSearchWordRequest,
+	IGroupSearchWordByUserRequest,
 } from '../types/requests/group.request';
 import {
 	IGroupAddMemberResponse,
@@ -104,21 +105,62 @@ export class GroupController {
 	@Post('/searchWord')
 	@Tags('Search Word')
 	async searchWord(
-		@Body() group: IGroupSearchWordRequest
+		@Body() word: IGroupSearchWordRequest
 	): Promise<IGroupSearchWordResponse[]> {
-		const conversation = await new ConversationRepository().getConversation(
-			group.GroupId
-		);
-		const result: IGroupSearchWordResponse[] = [];
-		conversation?.Messages.map((element) => {
-			if (element.Message.includes(group.Word)) {
-				result.push({
-					User: element.User,
-					Message: element.Message,
-					Time: element.Date,
+		const conversation = await new ConversationRepository().getConversation();
+		let result: IGroupSearchWordResponse[] = [];
+
+		conversation.map((element) => {
+			let groupWiseResult: IGroupSearchWordResponse = {
+				GroupId: element.Group,
+				Occurence: [],
+			};
+			if (element.Messages) {
+				element.Messages.map((element) => {
+					if (element.Message.includes(word.Word)) {
+						groupWiseResult.Occurence.push({
+							User: element.User,
+							Message: element.Message,
+							Time: element.Date,
+						});
+					}
 				});
+			}
+			if (groupWiseResult.Occurence.length > 0) {
+				result.push(groupWiseResult);
 			}
 		});
 		return result;
+	}
+	@Security('api_key')
+	@Post('searchWordByUser')
+	@Tags('Search Word')
+	async searchWordByUser(
+		@Body() word: IGroupSearchWordByUserRequest
+	): Promise<IGroupSearchWordResponse> {
+		const conversation = await new ConversationRepository().getConversation();
+		let result: any[] = [];
+
+		conversation.map((element) => {
+			let groupWiseResult: IGroupSearchWordResponse = {
+				GroupId: element.Group,
+				Occurence: [],
+			};
+			if (element.Messages) {
+				element.Messages.map((element) => {
+					if (element.Message.includes(word.Word)) {
+						groupWiseResult.Occurence.push({
+							User: element.User,
+							Message: element.Message,
+							Time: element.Date,
+						});
+					}
+				});
+			}
+			if (groupWiseResult.Occurence.length > 0) {
+				result.push(groupWiseResult);
+			}
+		});
+		return <IGroupSearchWordResponse>(<any>result);
 	}
 }
